@@ -3,10 +3,8 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Exception;
-use yii\base\NotSupportedException;
-use yii\db\ActiveRecord;
-use yii\db\Query;
+use yii\base\{Exception, NotSupportedException};
+use yii\db\{ActiveRecord, Query};
 use yii\web\IdentityInterface;
 
 /**

@@ -37,7 +37,7 @@ class m200508_153555_init_database extends Migration
                 'id'     => Schema::TYPE_PK,
                 'noteId' => Schema::TYPE_INTEGER . ' NOT NULL',
                 'name'   => Schema::TYPE_STRING . ' NOT NULL',
-                'status'  => Schema::TYPE_BOOLEAN . ' DEFAULT 1',
+                'status' => Schema::TYPE_BOOLEAN . ' DEFAULT 1',
             ]
         );
     }

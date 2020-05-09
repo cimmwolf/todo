@@ -6,8 +6,7 @@ namespace app\controllers;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\BaseActiveRecord;
-use yii\filters\AccessControl;
-use yii\filters\auth\HttpBearerAuth;
+use yii\filters\{AccessControl, auth\HttpBearerAuth};
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 

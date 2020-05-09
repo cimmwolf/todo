@@ -40,13 +40,15 @@ class UserTestCest
         $I->seeResponseCodeIs(HttpCode::CONFLICT);
     }
 
-    public function testLogin(ApiTester $I) {
+    public function testLogin(ApiTester $I)
+    {
         $I->sendPost('/login', ['username' => 'exist-user', 'password' => 'password']);
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseMatchesJsonType(['token' => 'string']);
     }
 
-    public function testWrongLogin(ApiTester $I) {
+    public function testWrongLogin(ApiTester $I)
+    {
         $I->sendPost('/login', ['username' => 'exist-user', 'password' => 'wrong-password']);
         $I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 

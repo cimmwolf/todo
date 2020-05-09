@@ -2,14 +2,12 @@
 
 namespace app\controllers;
 
-use app\models\LoginForm;
-use app\models\User;
+use app\models\{LoginForm, User};
 use Yii;
 use yii\base\Exception;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
 use yii\web\HttpException;
-use yii\web\Response;
 
 class SiteController extends Controller
 {
