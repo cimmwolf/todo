@@ -28,7 +28,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * Позволяет провести аутентификацию пользователя.
      *
      * @return array
      * @throws Exception

@@ -6,7 +6,7 @@ use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "todo".
+ * Это модель для таблицы "todo".
  *
  * @property int $id
  * @property int $noteId
@@ -15,17 +15,11 @@ use yii\db\ActiveRecord;
  */
 class Todo extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'todo';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -36,9 +30,6 @@ class Todo extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

@@ -6,9 +6,9 @@ use yii\base\Exception;
 use yii\base\Model;
 
 /**
- * LoginForm is the model behind the login form.
+ * LoginForm это модель для аутентификации пользователя.
  *
- * @property User|null $user This property is read-only.
+ * @property User|null $user Только для чтения.
  * @property array $token
  *
  */
@@ -27,9 +27,6 @@ class LoginForm extends Model
         return '';
     }
 
-    /**
-     * @return array the validation rules.
-     */
     public function rules()
     {
         return [
@@ -39,12 +36,12 @@ class LoginForm extends Model
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
+     * Проверяет пароль.
+     * Это метод для встроенной проверки проверки пароля в rules().
      *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
-     * @throws Exception
+     * @param string $attribute атрибут, который проверяется
+     * @param array $params дополнительные параметры из правила
+     * @noinspection PhpUnusedParameterInspection
      */
     public function validatePassword($attribute, $params)
     {
@@ -52,13 +49,13 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Неправильное имя пользователя или пароль.');
             }
         }
     }
 
     /**
-     * Finds user by [[username]]
+     * Ищет пользователя по [[username]]
      *
      * @return User|null
      */
@@ -72,8 +69,8 @@ class LoginForm extends Model
     }
 
     /**
-     * Logs in a user using the provided username and password.
-     * @return bool whether the user is logged in successfully
+     * Генерирует новый токен для пользователя, если аутентификация прошла успешно.
+     * @return bool признак того прошла ли аутентификация успешно
      * @throws Exception
      */
     public function login()
@@ -87,6 +84,10 @@ class LoginForm extends Model
         return false;
     }
 
+    /**
+     * Формирует ответ, который отправится клиенту после аутентификации
+     * @return array
+     */
     public function getToken()
     {
         return ['token' => $this->user->token];

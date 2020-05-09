@@ -7,7 +7,7 @@ use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "note".
+ * Это модель для таблицы "note".
  *
  * @property int $id
  * @property string $name
@@ -15,17 +15,11 @@ use yii\db\ActiveRecord;
  */
 class Note extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'note';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -35,9 +29,6 @@ class Note extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

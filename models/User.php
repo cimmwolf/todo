@@ -8,7 +8,7 @@ use yii\db\{ActiveRecord, Query};
 use yii\web\IdentityInterface;
 
 /**
- * This is the model class for table "user".
+ * Это модель для таблицы "user".
  *
  * @property int $id
  * @property string $username
@@ -20,9 +20,6 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'user';
@@ -38,14 +35,16 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['token' => $token]);
     }
 
+    /**
+     * Метод-помощник для поиска пользователей по [[username]]
+     * @param $username
+     * @return User|null
+     */
     public static function findByUsername($username)
     {
         return User::findOne(['username' => $username]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -55,9 +54,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -95,10 +91,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Validates password
+     * Проверяет пароль
      *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @param string $password
+     * @return bool
      */
     public function validatePassword($password)
     {
@@ -129,6 +125,10 @@ class User extends ActiveRecord implements IdentityInterface
         $this->token = Yii::$app->security->generateRandomString();
     }
 
+    /**
+     * Возвращает список ID Заметок, к которым у пользователя есть доступ
+     * @return array
+     */
     public function getNotesIds()
     {
         return (new Query())
