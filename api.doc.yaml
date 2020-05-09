@@ -5,6 +5,8 @@ info:
   title: ToDo API
   contact:
     email: denis@vistro.ru
+servers:
+  - url: http://localhost:8000/api/v1
 tags:
   - name: Пользователь
     description: Профиль пользователя системы
