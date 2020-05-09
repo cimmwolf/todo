@@ -1,0 +1,233 @@
+openapi: 3.0.0
+info:
+  description: Внутренний програмный интерфейс веб-приложения ToDo.
+  version: "1.0.0"
+  title: ToDo API
+  contact:
+    email: denis@vistro.ru
+tags:
+  - name: Пользователь
+    description: Профиль пользователя системы
+  - name: Заметка
+    description: Заметка, которая может содержать дела
+  - name: Дело
+    description: То, что нужно сделать
+security:
+  - bearerAuth: []
+paths:
+  /register:
+    post:
+      tags:
+        - Пользователь
+      summary: Регистрирует участника
+      operationId: register
+      responses:
+        '201':
+          description: Токен для немедленного входа
+
+  /login:
+    post:
+      tags:
+        - Пользователь
+      summary: Аутентификация участника
+      operationId: login
+      responses:
+        '200':
+          description: Токен для использования системы
+
+  /notes:
+    get:
+      tags:
+        - Заметка
+      summary: Возвращает список Заметок пользователя
+      operationId: getNotes
+      responses:
+        '200':
+          description: Информация о Заметках пользователя
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
+    post:
+      tags:
+        - Заметка
+      summary: Добавляет Заметку
+      operationId: createtNote
+      responses:
+        '201':
+          description: Информация о добавленной заметке
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+  /notes/{ID}:
+    patch:
+      tags:
+        - Заметка
+      summary: Обновляет Заметку
+      operationId: updateNote
+      parameters:
+        - in: path
+          name: id
+          description: ID Заметки.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация об обновлённой заметке
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+
+    delete:
+      tags:
+        - Заметка
+      summary: Удаляет Заметку
+      operationId: deleteNote
+      parameters:
+        - in: path
+          name: id
+          description: ID Заметки.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Признак, что Заметка удалена
+  /todos:
+    get:
+      tags:
+        - Дело
+      summary: Возвращает список Дел пользователя
+      operationId: getTodos
+      responses:
+        '200':
+          description: Информация о Делах пользователя
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+    post:
+      tags:
+        - Дело
+      summary: Добавляет Дело
+      operationId: createtTodo
+      responses:
+        '201':
+          description: Информация о добавленном Деле
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+  /todos/{ID}:
+    patch:
+      tags:
+        - Дело
+      summary: Обновляет Дело
+      operationId: updateTodo
+      parameters:
+        - in: path
+          name: id
+          description: ID Дела.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация об обновлённом Деле
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+
+    delete:
+      tags:
+        - Дело
+      summary: Удаляет Дело
+      operationId: deleteTodo
+      parameters:
+        - in: path
+          name: id
+          description: ID Дела.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Признак, что Дело удалено
+
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        id:
+          type: integer
+          description: Уникальный ID пользователя
+        username:
+          type: string
+          maxLength: 255
+          description: Имя пользователя
+        password:
+          type: string
+          maxLength: 255
+          description: Пароль пользователя
+        token:
+          type: string
+          maxLength: 255
+          description: Токен пользователя
+        role:
+          type: string
+          maxLength: 255
+          description: Роль пользователя
+    Note:
+      type: object
+      required:
+        - name
+        - userId
+      properties:
+        id:
+          type: integer
+          description: Уникальный ID заметки
+        name:
+          type: string
+          maxLength: 60
+          description: Название пользователя
+        userId:
+          type: integer
+          description: Уникальный ID владельца заметки
+    Todo:
+      type: object
+      required:
+        - noteId
+        - name
+      properties:
+        id:
+          type: integer
+          description: Уникальный ID Дела
+        noteId:
+          type: integer
+          description: Уникальный ID Заметки
+        name:
+          type: string
+          maxLength: 255
+          description: Описание того, что нужно сделать
+        status:
+          type: boolean
+          description: Отметка о том, видно ли дело в списке.
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
