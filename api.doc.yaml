@@ -64,7 +64,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Note'
-  /notes/{ID}:
+  /notes/{id}:
     patch:
       tags:
         - Заметка
@@ -127,7 +127,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
-  /todos/{ID}:
+  /todos/{id}:
     patch:
       tags:
         - Дело
